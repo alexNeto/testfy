@@ -1,5 +1,6 @@
 package org.alexneto.testfy;
 
+import org.alexneto.testfy.help.Help;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -11,23 +12,27 @@ public class Main {
 
 	public static void main(String[] args) {
 		CommandLine commandLine;
-		Option option_help = Option.builder("h").required(true).desc("show man page").longOpt("help").build();
+		Option option_help = Option.builder("h").required(false).desc("show man page").longOpt("help").build();
+		Option option_manPage = Option.builder("H").required(false).desc("Show complete help").longOpt("HELP").build();
 
 		Options options = new Options();
 		CommandLineParser parser = new DefaultParser();
 
-		String[] testArgs = { "h", "--help" };
+		String[] testArgs = { "-hH", "--help" };
 
 		options.addOption(option_help);
+		options.addOption(option_manPage);
 
 		try {
 			commandLine = parser.parse(options, testArgs);
 
 			if (commandLine.hasOption("h")) {
-				System.out.print("Option h is present.  The value is: ");
-				System.out.println(commandLine.getOptionValue("A"));
+				new Help().help();
 			}
-
+			if (commandLine.hasOption("H")) {
+				new Help().manPage();
+			}
+			// System.out.println(commandLine.getOptionValue("H"));
 			String[] remainder = commandLine.getArgs();
 			System.out.print("Remaining arguments: ");
 			for (String argument : remainder) {
