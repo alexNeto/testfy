@@ -1,4 +1,4 @@
-package org.alexneto.testfy.help;
+package org.alexneto.testfy.commands.help;
 
 public class Help{
 	
@@ -16,9 +16,11 @@ public class Help{
 	}
 
 	public void manPage() {
+		
+		// TODO - man page
 	}
 
-	public void asciiArt() {
+	private void asciiArt() {
 		System.out.println("_____  ____  __  _____  ____ __  ");
 		System.out.println(" | |  | |_  ( (`  | |  | |_  \\ \\_/");
 		System.out.println(" |_|  |_|__ _)_)  |_|  |_|    |_|");	
